@@ -1,23 +1,6 @@
 
 <template>
-  <div class="home">
-    <h1>New Product</h1>
-    <div>
-      <div>
-        Name: <input v-model="newProductName">
-      </div>
-      <div>
-        Price: <input v-model="newProductPrice">
-      </div>
-      <div>
-        Description: <input v-model="newProductDescription">
-      </div>
-      <div>
-        Image URL: <input v-model="newProductImageURL">
-      </div>
-        <button v-on:click="createProduct()">Create</button>
-    </div>
-
+  <div class="recipes-index">
     <h1>All Products</h1>
     <div v-for="product in products">
       <h2>{{ product.name }}</h2> 
@@ -66,10 +49,6 @@ export default {
   data: function() {
     return {
       products: [],
-      newProductName: "",
-      newProductPrice: "",
-      newProductDescription: "",
-      newProductImageURL: "",
       createProduct: {}
     };
   },
@@ -114,14 +93,6 @@ export default {
       .then(response => {
         console.log("success", response.data);
         inputProduct = response.data;
-      });
-    },
-    destroyProduct: function(inputProduct) {
-      axios.delete("/api/products/" + inputProduct.id)
-      .then( response => {
-        console.log("Success", response.data);
-        var index = this.products.indexOf(inputProduct);
-        this.products.splice(index, 1);
       });
     }
   }
